@@ -1,16 +1,9 @@
-name: Test matrix
-on: push
+name: Identify Event Type
+on: [push, pull_request, issues]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node: [14, 16]
+  identify-event:
+    runs-on: ubuntu-lastest
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-      - name: Output node version
-        run: node --version
+      - name: Check Event Name
+        run: echo "This workflow was triggered by a ${{ github.event-name }} event."
